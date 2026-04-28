@@ -1,0 +1,217 @@
+:root {
+  --primary: #1e3a8a;
+  --psd: #dc2626;
+  --coh: #ea580c;
+  --mic: #7c3aed;
+  --bg: #fafafa;
+  --text: #1f2937;
+  --muted: #6b7280;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ---- Section headings ---- */
+.section-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+}
+
+.section-subheading {
+  font-size: 1rem;
+  color: var(--muted);
+  max-width: 42rem;
+}
+
+/* ---- Hero stat cards ---- */
+.stat-card {
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 24px rgba(30, 58, 138, 0.08);
+  text-align: center;
+  min-width: 10rem;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.scroll-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* ---- Feature cards ---- */
+.feature-card {
+  flex: 1;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.75rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+}
+
+/* ---- Confusion matrix ---- */
+.confusion-matrix {
+  border-collapse: separate;
+  border-spacing: 4px;
+}
+
+.cm-cell {
+  padding: 1rem 1.25rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  min-width: 4rem;
+}
+
+/* ---- Weight bars: animate on scroll ---- */
+.bar-animate [data-target] {
+  transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ---- Pulse glow for microstate bar ---- */
+@keyframes mic-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124, 58, 237, 0.4); }
+  50% { box-shadow: 0 0 12px 6px rgba(124, 58, 237, 0.3); }
+}
+
+.mic-glow {
+  animation: mic-pulse 2s ease-in-out infinite;
+}
+
+.pulse-badge {
+  font-size: 0.65rem;
+  background: #7c3aed;
+  color: white;
+  padding: 1px 6px;
+  border-radius: 9999px;
+  animation: mic-pulse 2s ease-in-out infinite;
+}
+
+/* ---- Dot grid for ReliefF section ---- */
+#full-grid {
+  display: grid;
+  grid-template-columns: repeat(28, 10px);
+  gap: 3px;
+  justify-content: center;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d1d5db;
+}
+
+/* ---- SHAP Topomap cards ---- */
+.topo-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.topo-card-small {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topo-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-align: center;
+}
+
+.topo-caption {
+  font-size: 0.7rem;
+  color: var(--muted);
+  text-align: center;
+  max-width: 160px;
+}
+
+/* ---- Microstate cycling timelines ---- */
+.ms-track {
+  height: 36px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f3f4f6;
+  position: relative;
+}
+
+.ms-strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200%;
+  display: flex;
+  animation: ms-slide var(--speed, 1.5s) linear infinite;
+}
+
+@keyframes ms-slide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ---- Transitions for scroll-in bars ---- */
+.bar-fill {
+  transition: width 1.2s ease-out;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .section-heading { font-size: 1.5rem; }
+  .stat-number { font-size: 2.25rem; }
+  .feature-card { min-width: 0; }
+  #full-grid { grid-template-columns: repeat(20, 10px); }
+}
+
+/* ---- Reduced motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .ms-strip { animation: none !important; }
+}
