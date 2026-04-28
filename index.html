@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NeuroStage — EEG-Based Cognitive Decline Detection</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});"></script>
   <link rel="stylesheet" href="assets/css/style.css" />
   <script>
     tailwind.config = {
@@ -32,7 +36,7 @@
   <h2 class="text-xl md:text-2xl font-semibold text-[#1e3a8a] mb-1">A Stable and Interpretable Multidomain EEG Model<br>for Early Cognitive Decline Detection</h2>
   <p class="text-lg text-[#6b7280] mb-10">神經階段：基於多域腦電圖之早期認知衰退穩健可解釋性偵測模型</p>
 
-  <div class="flex flex-col sm:flex-row gap-8 mb-14">
+  <div class="flex flex-col sm:flex-row gap-8 mb-8">
     <div class="stat-card">
       <div class="stat-number text-[#1e3a8a]">83.2%</div>
       <div class="stat-label">Three-class accuracy</div>
@@ -47,7 +51,16 @@
     </div>
   </div>
 
-  <p class="text-base text-[#6b7280] max-w-xl mb-16">A multidomain EEG model with two-stage ensemble classification combining power spectral density, coherence, and microstate features.</p>
+  <!-- Validation strip -->
+  <div class="flex flex-col sm:flex-row gap-4 sm:gap-8 items-center justify-center mb-8 text-xs text-[#6b7280] border border-[#e5e7eb] rounded-xl px-6 py-3 bg-white/60">
+    <span>n = 95 subjects (NC: 28 / MCI: 31 / Dementia: 36)</span>
+    <span class="hidden sm:inline text-[#d1d5db]">|</span>
+    <span>Leave-One-Subject-Out Cross-Validation</span>
+    <span class="hidden sm:inline text-[#d1d5db]">|</span>
+    <span>Single-center: Tucheng Hospital Neurology Outpatient</span>
+  </div>
+
+  <p class="text-base text-[#6b7280] max-w-xl mb-12">A multidomain EEG model with two-stage ensemble classification combining power spectral density, coherence, and microstate features.</p>
 
   <a href="#problem" class="scroll-arrow" aria-label="Scroll down">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-[#1e3a8a] animate-bounce" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,7 +77,6 @@
   <p class="section-subheading">Dementia is a global crisis — but MCI is where we can act.</p>
 
   <div class="flex flex-col md:flex-row gap-12 items-center mt-10">
-    <!-- Left: stat block -->
     <div class="flex-1 flex flex-col gap-6">
       <div class="bg-white rounded-2xl shadow p-8 border-l-4 border-[#1e3a8a]">
         <div class="text-5xl font-bold text-[#1e3a8a] mb-2">57.4M</div>
@@ -83,47 +95,29 @@
       </div>
     </div>
 
-    <!-- Right: timeline SVG -->
     <div class="flex-1">
       <svg viewBox="0 0 480 220" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-lg mx-auto">
-        <!-- Timeline line -->
         <line x1="40" y1="110" x2="440" y2="110" stroke="#d1d5db" stroke-width="3" stroke-linecap="round"/>
-
-        <!-- NC node -->
         <circle cx="80" cy="110" r="22" fill="#d1fae5" stroke="#059669" stroke-width="2"/>
         <text x="80" y="115" text-anchor="middle" font-size="11" font-weight="600" fill="#065f46">NC</text>
         <text x="80" y="148" text-anchor="middle" font-size="10" fill="#6b7280">Normal</text>
         <text x="80" y="162" text-anchor="middle" font-size="10" fill="#6b7280">Cognition</text>
-
-        <!-- Arrow NC→MCI -->
         <path d="M103 110 L163 110" stroke="#9ca3af" stroke-width="2" marker-end="url(#arr)"/>
-
-        <!-- MCI node — highlighted -->
         <rect x="163" y="72" width="120" height="76" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
         <text x="223" y="105" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">MCI</text>
         <text x="223" y="122" text-anchor="middle" font-size="10" fill="#92400e">⚡ Intervention</text>
         <text x="223" y="136" text-anchor="middle" font-size="10" fill="#92400e">Window</text>
-
-        <!-- Arrow MCI→Dementia -->
         <path d="M284 110 L354 110" stroke="#9ca3af" stroke-width="2" marker-end="url(#arr)"/>
-
-        <!-- Dementia node -->
         <circle cx="390" cy="110" r="32" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
         <text x="390" y="107" text-anchor="middle" font-size="10" font-weight="600" fill="#991b1b">Demen-</text>
         <text x="390" y="120" text-anchor="middle" font-size="10" font-weight="600" fill="#991b1b">tia</text>
-
-        <!-- Intervention arrow -->
         <path d="M223 72 L223 40" stroke="#d97706" stroke-width="1.5" stroke-dasharray="4,3"/>
         <text x="223" y="30" text-anchor="middle" font-size="10" fill="#d97706" font-weight="600">Detect &amp; Intervene Here</text>
-
-        <!-- Arrow marker -->
         <defs>
           <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
             <path d="M0,0 L0,6 L8,3 z" fill="#9ca3af"/>
           </marker>
         </defs>
-
-        <!-- Caption -->
         <text x="240" y="200" text-anchor="middle" font-size="11" fill="#6b7280">Cognitive Decline Trajectory →</text>
       </svg>
     </div>
@@ -131,55 +125,160 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 3: SYSTEM ARCHITECTURE -->
+<!-- SECTION 3: DATASET & VALIDATION PROTOCOL (NEW) -->
 <!-- ============================================================ -->
-<section id="architecture" data-section="3" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-white">
+<section id="dataset" data-section="3" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-white">
+  <div class="max-w-6xl mx-auto w-full">
+    <h2 class="section-heading">Dataset &amp; Validation Protocol</h2>
+    <p class="section-subheading">Rigorous validation on a clinically-acquired cohort.</p>
+
+    <div class="flex flex-col lg:flex-row gap-12 mt-10">
+      <!-- Left: Demographics table -->
+      <div class="flex-1">
+        <h3 class="text-sm font-bold text-[#6b7280] uppercase tracking-wider mb-4">Participant Demographics</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse">
+            <thead>
+              <tr class="bg-[#1e3a8a] text-white">
+                <th class="px-3 py-2 text-left font-semibold rounded-tl-lg">Group</th>
+                <th class="px-3 py-2 text-center font-semibold">n</th>
+                <th class="px-3 py-2 text-center font-semibold">Age (mean ± SD)</th>
+                <th class="px-3 py-2 text-center font-semibold">Edu. yrs</th>
+                <th class="px-3 py-2 text-center font-semibold">MMSE</th>
+                <th class="px-3 py-2 text-center font-semibold">ADAS-Cog-11</th>
+                <th class="px-3 py-2 text-center font-semibold rounded-tr-lg">CDR</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-[#e5e7eb] bg-[#f0fdf4]">
+                <td class="px-3 py-3 font-semibold text-[#065f46]">NC</td>
+                <td class="px-3 py-3 text-center">28</td>
+                <td class="px-3 py-3 text-center">56.1 ± 14.2</td>
+                <td class="px-3 py-3 text-center">11.6 ± 3.9</td>
+                <td class="px-3 py-3 text-center">29.3 ± 0.9</td>
+                <td class="px-3 py-3 text-center">7.4 ± 3.3</td>
+                <td class="px-3 py-3 text-center">0.36 ± 0.27</td>
+              </tr>
+              <tr class="border-b border-[#e5e7eb] bg-[#fffbeb]">
+                <td class="px-3 py-3 font-semibold text-[#92400e]">MCI</td>
+                <td class="px-3 py-3 text-center">31</td>
+                <td class="px-3 py-3 text-center">59.7 ± 13.6</td>
+                <td class="px-3 py-3 text-center">12.1 ± 3.7</td>
+                <td class="px-3 py-3 text-center">28.1 ± 1.8</td>
+                <td class="px-3 py-3 text-center">11.9 ± 3.6</td>
+                <td class="px-3 py-3 text-center">0.37 ± 0.22</td>
+              </tr>
+              <tr class="bg-[#fff1f2]">
+                <td class="px-3 py-3 font-semibold text-[#991b1b]">Dementia</td>
+                <td class="px-3 py-3 text-center">36</td>
+                <td class="px-3 py-3 text-center">69.8 ± 8.3</td>
+                <td class="px-3 py-3 text-center">8.4 ± 3.9</td>
+                <td class="px-3 py-3 text-center">20.1 ± 4.2</td>
+                <td class="px-3 py-3 text-center">29.8 ± 10.1</td>
+                <td class="px-3 py-3 text-center">0.68 ± 0.32</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="text-xs text-[#6b7280] mt-2">MMSE = Mini-Mental State Examination · ADAS-Cog = Alzheimer's Disease Assessment Scale · CDR = Clinical Dementia Rating</p>
+      </div>
+
+      <!-- Right: LOSO explanation + animated circles -->
+      <div class="flex-1">
+        <div class="border-2 border-[#1e3a8a] rounded-2xl p-6 bg-[#eff6ff]">
+          <h3 class="text-base font-bold text-[#1e3a8a] mb-4">Leave-One-Subject-Out (LOSO)</h3>
+          <ul class="space-y-3 text-sm text-[#1f2937] mb-6">
+            <li class="flex gap-2">
+              <span class="text-[#1e3a8a] font-bold shrink-0">✓</span>
+              <span>95 cross-validation iterations — every subject tested as unseen data</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-[#1e3a8a] font-bold shrink-0">✓</span>
+              <span>No fixed train/test split: training maximized while preserving subject independence</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-[#1e3a8a] font-bold shrink-0">✓</span>
+              <span>Strictest cross-subject protocol for limited-sample EEG/BCI work</span>
+            </li>
+          </ul>
+
+          <!-- LOSO visualization: 95 circles -->
+          <div class="mt-4">
+            <p class="text-xs text-[#6b7280] mb-2">Each iteration: one subject held out as test (red), 94 used for training (blue)</p>
+            <div id="loso-circles" class="flex flex-wrap gap-1 justify-start"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4: SYSTEM ARCHITECTURE -->
+<!-- ============================================================ -->
+<section id="architecture" data-section="4" class="min-h-screen flex flex-col justify-center px-6 py-20">
   <div class="max-w-6xl mx-auto w-full">
     <h2 class="section-heading">System Architecture</h2>
     <p class="section-subheading">End-to-end pipeline from raw EEG to interpretable classification.</p>
 
     <div class="mt-10 overflow-x-auto">
-      <svg viewBox="0 0 780 520" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-3xl mx-auto">
+      <!-- viewBox extended upward (-70) to prevent EEG cap nose/labels from clipping -->
+      <svg viewBox="0 -70 780 590" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-3xl mx-auto">
         <defs>
           <marker id="arrd" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
             <path d="M0,0 L0,6 L8,3 z" fill="#6b7280"/>
           </marker>
         </defs>
 
-        <!-- EEG Cap -->
+        <!-- EEG Cap — centered at (390,30) -->
         <g transform="translate(390,30)">
-          <!-- Head outline -->
           <ellipse cx="0" cy="0" rx="50" ry="55" fill="#eff6ff" stroke="#1e3a8a" stroke-width="2"/>
-          <!-- Nose -->
           <polygon points="-6,-55 6,-55 0,-68" fill="#1e3a8a"/>
-          <!-- Ear stubs -->
           <rect x="-54" y="-10" width="7" height="18" rx="3" fill="#1e3a8a"/>
           <rect x="47" y="-10" width="7" height="18" rx="3" fill="#1e3a8a"/>
-          <!-- Electrodes (19) — approximate positions scaled to 50r -->
           <!-- Fp1/Fp2 -->
-          <circle cx="-14" cy="-44" r="4" fill="#3b82f6"/><text x="-14" y="-50" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Fp1</text>
-          <circle cx="14" cy="-44" r="4" fill="#3b82f6"/><text x="14" y="-50" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Fp2</text>
+          <circle cx="-14" cy="-44" r="4" fill="#3b82f6"/>
+          <text x="-14" y="-50" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Fp1</text>
+          <circle cx="14" cy="-44" r="4" fill="#3b82f6"/>
+          <text x="14" y="-50" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Fp2</text>
           <!-- F row -->
-          <circle cx="-36" cy="-26" r="4" fill="#3b82f6"/><text x="-43" y="-29" font-size="5.5" text-anchor="middle" fill="#1e3a8a">F7</text>
-          <circle cx="-22" cy="-27" r="4" fill="#3b82f6"/><text x="-22" y="-33" font-size="5.5" text-anchor="middle" fill="#1e3a8a">F3</text>
-          <circle cx="0" cy="-28" r="4" fill="#3b82f6"/><text x="0" y="-34" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Fz</text>
-          <circle cx="22" cy="-27" r="4" fill="#3b82f6"/><text x="22" y="-33" font-size="5.5" text-anchor="middle" fill="#1e3a8a">F4</text>
-          <circle cx="36" cy="-26" r="4" fill="#3b82f6"/><text x="43" y="-29" font-size="5.5" text-anchor="middle" fill="#1e3a8a">F8</text>
-          <!-- C row -->
-          <circle cx="-45" cy="0" r="4" fill="#3b82f6"/><text x="-45" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">T3</text>
-          <circle cx="-25" cy="0" r="4" fill="#3b82f6"/><text x="-25" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">C3</text>
-          <circle cx="0" cy="0" r="4" fill="#3b82f6"/><text x="0" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Cz</text>
-          <circle cx="25" cy="0" r="4" fill="#3b82f6"/><text x="25" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">C4</text>
-          <circle cx="45" cy="0" r="4" fill="#3b82f6"/><text x="45" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">T4</text>
-          <!-- P row -->
-          <circle cx="-36" cy="26" r="4" fill="#3b82f6"/><text x="-43" y="23" font-size="5.5" text-anchor="middle" fill="#1e3a8a">T5</text>
-          <circle cx="-22" cy="27" r="4" fill="#3b82f6"/><text x="-22" y="22" font-size="5.5" text-anchor="middle" fill="#1e3a8a">P3</text>
-          <circle cx="0" cy="28" r="4" fill="#3b82f6"/><text x="0" y="22" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Pz</text>
-          <circle cx="22" cy="27" r="4" fill="#3b82f6"/><text x="22" y="22" font-size="5.5" text-anchor="middle" fill="#1e3a8a">P4</text>
-          <circle cx="36" cy="26" r="4" fill="#3b82f6"/><text x="43" y="23" font-size="5.5" text-anchor="middle" fill="#1e3a8a">T6</text>
+          <circle cx="-36" cy="-26" r="4" fill="#3b82f6"/>
+          <text x="-44" y="-29" font-size="5.5" text-anchor="middle" fill="#1e3a8a">F7</text>
+          <circle cx="-22" cy="-27" r="4" fill="#3b82f6"/>
+          <text x="-22" y="-33" font-size="5.5" text-anchor="middle" fill="#1e3a8a">F3</text>
+          <circle cx="0" cy="-28" r="4" fill="#3b82f6"/>
+          <text x="0" y="-34" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Fz</text>
+          <circle cx="22" cy="-27" r="4" fill="#3b82f6"/>
+          <text x="22" y="-33" font-size="5.5" text-anchor="middle" fill="#1e3a8a">F4</text>
+          <circle cx="36" cy="-26" r="4" fill="#3b82f6"/>
+          <text x="44" y="-29" font-size="5.5" text-anchor="middle" fill="#1e3a8a">F8</text>
+          <!-- C/T row -->
+          <circle cx="-45" cy="0" r="4" fill="#3b82f6"/>
+          <text x="-45" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">T3</text>
+          <circle cx="-25" cy="0" r="4" fill="#3b82f6"/>
+          <text x="-25" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">C3</text>
+          <circle cx="0" cy="0" r="4" fill="#3b82f6"/>
+          <text x="0" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Cz</text>
+          <circle cx="25" cy="0" r="4" fill="#3b82f6"/>
+          <text x="25" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">C4</text>
+          <circle cx="45" cy="0" r="4" fill="#3b82f6"/>
+          <text x="45" y="-6" font-size="5.5" text-anchor="middle" fill="#1e3a8a">T4</text>
+          <!-- P/T row -->
+          <circle cx="-36" cy="26" r="4" fill="#3b82f6"/>
+          <text x="-44" y="23" font-size="5.5" text-anchor="middle" fill="#1e3a8a">T5</text>
+          <circle cx="-22" cy="27" r="4" fill="#3b82f6"/>
+          <text x="-22" y="22" font-size="5.5" text-anchor="middle" fill="#1e3a8a">P3</text>
+          <circle cx="0" cy="28" r="4" fill="#3b82f6"/>
+          <text x="0" y="22" font-size="5.5" text-anchor="middle" fill="#1e3a8a">Pz</text>
+          <circle cx="22" cy="27" r="4" fill="#3b82f6"/>
+          <text x="22" y="22" font-size="5.5" text-anchor="middle" fill="#1e3a8a">P4</text>
+          <circle cx="36" cy="26" r="4" fill="#3b82f6"/>
+          <text x="44" y="23" font-size="5.5" text-anchor="middle" fill="#1e3a8a">T6</text>
           <!-- O row -->
-          <circle cx="-14" cy="44" r="4" fill="#3b82f6"/><text x="-14" y="54" font-size="5.5" text-anchor="middle" fill="#1e3a8a">O1</text>
-          <circle cx="14" cy="44" r="4" fill="#3b82f6"/><text x="14" y="54" font-size="5.5" text-anchor="middle" fill="#1e3a8a">O2</text>
+          <circle cx="-14" cy="44" r="4" fill="#3b82f6"/>
+          <text x="-14" y="54" font-size="5.5" text-anchor="middle" fill="#1e3a8a">O1</text>
+          <circle cx="14" cy="44" r="4" fill="#3b82f6"/>
+          <text x="14" y="54" font-size="5.5" text-anchor="middle" fill="#1e3a8a">O2</text>
           <text x="0" y="80" text-anchor="middle" font-size="9" fill="#6b7280">19-channel EEG (10–20)</text>
         </g>
 
@@ -210,9 +309,9 @@
         <text x="640" y="264" text-anchor="middle" font-size="9.5" fill="#5b21b6">Brain State Dynamics</text>
         <text x="640" y="278" text-anchor="middle" font-size="9" fill="#5b21b6">134 features</text>
 
-        <!-- Branching arrows from preprocessing to 3 boxes -->
+        <!-- Branching lines from preprocessing to 3 boxes -->
         <path d="M390 218 L140 218" stroke="#6b7280" stroke-width="1.5"/>
-        <line x1="140" y1="218" x2="140" y2="218" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrd)"/>
+        <line x1="140" y1="218" x2="140" y2="220" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrd)"/>
         <line x1="390" y1="218" x2="390" y2="220" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrd)"/>
         <path d="M390 218 L640 218" stroke="#6b7280" stroke-width="1.5"/>
         <line x1="640" y1="218" x2="640" y2="220" stroke="#6b7280" stroke-width="1.5" marker-end="url(#arrd)"/>
@@ -245,16 +344,15 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 4: THREE FEATURE DOMAINS -->
+<!-- SECTION 5: THREE FEATURE DOMAINS -->
 <!-- ============================================================ -->
-<section id="features" data-section="4" class="min-h-screen flex flex-col justify-center px-6 py-20">
+<section id="features" data-section="5" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-white">
   <div class="max-w-6xl mx-auto w-full">
     <h2 class="section-heading">Three Feature Domains</h2>
     <p class="section-subheading">Each domain captures a distinct dimension of brain activity.</p>
 
     <div class="flex flex-col md:flex-row gap-8 mt-10 observe-me">
 
-      <!-- PSD card -->
       <div class="feature-card border-t-4 border-[#dc2626]">
         <div class="flex items-center gap-3 mb-4">
           <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
@@ -265,11 +363,9 @@
         <p class="text-sm text-[#6b7280] italic mb-3">"What frequencies dominate?"</p>
         <p class="text-sm text-[#1f2937] mb-4">Power Spectral Density measures how much signal energy exists at each frequency band across all channels.</p>
         <div class="badge bg-red-50 text-[#dc2626]">19 channels × 6 bands = 114 features</div>
-        <!-- Mini SVG: frequency curve -->
         <svg viewBox="0 0 200 100" class="w-full mt-4 rounded-lg bg-red-50 p-2">
           <text x="10" y="12" font-size="8" fill="#9ca3af">δ  θ  α  β  γ</text>
           <path d="M20,80 C35,75 45,40 60,35 C75,30 85,55 105,50 C120,46 135,65 155,70 C170,74 180,78 190,80" stroke="#dc2626" stroke-width="2" fill="none"/>
-          <!-- Band shading -->
           <rect x="20" y="35" width="18" height="45" fill="#dc2626" opacity="0.15" rx="2"/>
           <rect x="42" y="40" width="18" height="40" fill="#dc2626" opacity="0.12" rx="2"/>
           <rect x="64" y="50" width="18" height="30" fill="#dc2626" opacity="0.10" rx="2"/>
@@ -280,7 +376,6 @@
         </svg>
       </div>
 
-      <!-- Coherence card -->
       <div class="feature-card border-t-4 border-[#ea580c]">
         <div class="flex items-center gap-3 mb-4">
           <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center">
@@ -291,13 +386,11 @@
         <p class="text-sm text-[#6b7280] italic mb-3">"Are brain regions in sync?"</p>
         <p class="text-sm text-[#1f2937] mb-4">Coherence quantifies how synchronized the oscillations are between every pair of electrode channels at different frequencies.</p>
         <div class="badge bg-orange-50 text-[#ea580c]">171 channel pairs × 4 bands = 684 features</div>
-        <!-- Mini SVG: sync waves -->
         <svg viewBox="0 0 200 100" class="w-full mt-4 rounded-lg bg-orange-50 p-2">
           <circle cx="50" cy="50" r="22" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
           <text x="50" y="54" text-anchor="middle" font-size="8" fill="#ea580c">Frontal</text>
           <circle cx="150" cy="50" r="22" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
           <text x="150" y="54" text-anchor="middle" font-size="8" fill="#ea580c">Posterior</text>
-          <!-- Sync waves between -->
           <path d="M73,44 C88,35 92,28 100,28 C108,28 112,35 127,44" stroke="#ea580c" stroke-width="1.5" fill="none" opacity="0.8"/>
           <path d="M73,50 C88,50 112,50 127,50" stroke="#ea580c" stroke-width="2" fill="none"/>
           <path d="M73,56 C88,65 92,72 100,72 C108,72 112,65 127,56" stroke="#ea580c" stroke-width="1.5" fill="none" opacity="0.8"/>
@@ -305,7 +398,6 @@
         </svg>
       </div>
 
-      <!-- Microstate card -->
       <div class="feature-card border-t-4 border-[#7c3aed]">
         <div class="flex items-center gap-3 mb-4">
           <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
@@ -316,21 +408,15 @@
         <p class="text-sm text-[#6b7280] italic mb-3">"How does the brain switch states?"</p>
         <p class="text-sm text-[#1f2937] mb-4">Microstates are stable, recurring topographic configurations of scalp electrical potential — the "atoms" of thought that last 60–120 ms.</p>
         <div class="badge bg-purple-50 text-[#7c3aed]">58 temporal + 76 spatial = 134 features</div>
-        <!-- Mini SVG: 4 topomaps A B C D -->
         <svg viewBox="0 0 200 80" class="w-full mt-4 rounded-lg bg-purple-50 p-2">
-          <!-- 4 small circles -->
           <circle cx="28" cy="38" r="20" fill="#ddd6fe" stroke="#7c3aed" stroke-width="1.5"/>
           <text x="28" y="42" text-anchor="middle" font-size="10" font-weight="700" fill="#5b21b6">A</text>
-
           <circle cx="78" cy="38" r="20" fill="#c4b5fd" stroke="#7c3aed" stroke-width="1.5"/>
           <text x="78" y="42" text-anchor="middle" font-size="10" font-weight="700" fill="#5b21b6">B</text>
-
           <circle cx="128" cy="38" r="20" fill="#a78bfa" stroke="#7c3aed" stroke-width="1.5"/>
           <text x="128" y="42" text-anchor="middle" font-size="10" font-weight="700" fill="#5b21b6">C</text>
-
           <circle cx="178" cy="38" r="20" fill="#8b5cf6" stroke="#7c3aed" stroke-width="1.5"/>
           <text x="178" y="42" text-anchor="middle" font-size="10" font-weight="700" fill="white">D</text>
-
           <text x="100" y="72" text-anchor="middle" font-size="7" fill="#9ca3af">Four canonical microstates A → D</text>
         </svg>
       </div>
@@ -339,24 +425,20 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 5: RELIEFF FEATURE REDUCTION -->
+<!-- SECTION 6: RELIEFF FEATURE REDUCTION -->
 <!-- ============================================================ -->
-<section id="relieff" data-section="5" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-white">
+<section id="relieff" data-section="6" class="min-h-screen flex flex-col justify-center px-6 py-20">
   <div class="max-w-5xl mx-auto w-full">
     <h2 class="section-heading">ReliefF Feature Reduction</h2>
     <p class="section-subheading">From 932 raw features down to 30 highly discriminative ones.</p>
 
     <div class="flex flex-col md:flex-row items-center gap-12 mt-10">
-      <!-- Left: 932 dot grid -->
       <div class="flex-1 text-center">
         <p class="text-4xl font-bold text-[#6b7280] mb-3">932</p>
         <p class="text-sm text-[#6b7280] mb-4">Raw features</p>
-        <div class="dot-grid" id="full-grid">
-          <!-- Dots rendered via JS -->
-        </div>
+        <div class="dot-grid" id="full-grid"></div>
       </div>
 
-      <!-- Funnel arrow -->
       <div class="flex flex-col items-center gap-2 px-4">
         <svg viewBox="0 0 80 140" class="w-16">
           <polygon points="0,0 80,0 50,70 30,70" fill="#e5e7eb"/>
@@ -367,57 +449,38 @@
         <p class="text-xs text-[#6b7280] text-center max-w-[80px]">Top 10<br>per domain</p>
       </div>
 
-      <!-- Right: 30 highlighted dots -->
       <div class="flex-1 text-center">
         <p class="text-4xl font-bold text-[#1e3a8a] mb-3">30</p>
         <p class="text-sm text-[#6b7280] mb-4">Selected features</p>
         <div class="flex flex-col items-center gap-2">
-          <!-- 10 PSD dots -->
           <div>
             <p class="text-xs font-semibold text-[#dc2626] mb-1">PSD (10)</p>
             <div class="flex gap-1 flex-wrap justify-center">
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div><div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div><div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div><div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div><div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#dc2626]"></div><div class="w-5 h-5 rounded-full bg-[#dc2626]"></div>
             </div>
           </div>
-          <!-- 10 Coherence dots -->
           <div>
             <p class="text-xs font-semibold text-[#ea580c] mb-1">Coherence (10)</p>
             <div class="flex gap-1 flex-wrap justify-center">
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div><div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div><div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div><div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div><div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#ea580c]"></div><div class="w-5 h-5 rounded-full bg-[#ea580c]"></div>
             </div>
           </div>
-          <!-- 10 Microstate dots -->
           <div>
             <p class="text-xs font-semibold text-[#7c3aed] mb-1">Microstate (10)</p>
             <div class="flex gap-1 flex-wrap justify-center">
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
-              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div><div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div><div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div><div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div><div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
+              <div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div><div class="w-5 h-5 rounded-full bg-[#7c3aed]"></div>
             </div>
           </div>
         </div>
@@ -431,9 +494,9 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 6: TWO-STAGE CLASSIFIER -->
+<!-- SECTION 7: TWO-STAGE CLASSIFIER + META-LEARNER SPEC -->
 <!-- ============================================================ -->
-<section id="classifier" data-section="6" class="min-h-screen flex flex-col justify-center px-6 py-20">
+<section id="classifier" data-section="7" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-white">
   <div class="max-w-6xl mx-auto w-full">
     <h2 class="section-heading">Two-Stage Ensemble Classifier</h2>
     <p class="section-subheading">Hierarchical classification mirrors how clinicians reason.</p>
@@ -447,125 +510,116 @@
               <path d="M0,0 L0,6 L8,3 z" fill="#6b7280"/>
             </marker>
           </defs>
-
-          <!-- Stage 1 label -->
           <rect x="0" y="0" width="440" height="200" rx="12" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
           <text x="14" y="20" font-size="10" font-weight="700" fill="#1e3a8a">STAGE 1 — Dementia vs Non-Dementia</text>
-
-          <!-- 3 base models S1 -->
           <rect x="20" y="30" width="110" height="36" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
           <text x="75" y="53" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="600">PSD model</text>
-
           <rect x="165" y="30" width="110" height="36" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
           <text x="220" y="53" text-anchor="middle" font-size="10" fill="#ea580c" font-weight="600">Coh model</text>
-
           <rect x="310" y="30" width="110" height="36" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
           <text x="365" y="53" text-anchor="middle" font-size="10" fill="#7c3aed" font-weight="600">Mic model</text>
-
-          <!-- Converge arrows -->
           <line x1="75" y1="66" x2="75" y2="90" stroke="#6b7280" stroke-width="1.5"/>
           <line x1="220" y1="66" x2="220" y2="90" stroke="#6b7280" stroke-width="1.5"/>
           <line x1="365" y1="66" x2="365" y2="90" stroke="#6b7280" stroke-width="1.5"/>
           <path d="M75 90 L220 90 L365 90" stroke="#6b7280" stroke-width="1.5"/>
           <line x1="220" y1="90" x2="220" y2="108" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a2)"/>
-
-          <!-- Meta-learner S1 -->
           <rect x="130" y="110" width="180" height="36" rx="8" fill="#1e3a8a"/>
-          <text x="220" y="133" text-anchor="middle" font-size="10" fill="white" font-weight="600">Meta-learner</text>
-
-          <!-- Split arrow -->
+          <text x="220" y="133" text-anchor="middle" font-size="10" fill="white" font-weight="600">Meta-learner (Logistic Reg.)</text>
           <line x1="220" y1="146" x2="220" y2="160" stroke="#6b7280" stroke-width="1.5"/>
           <path d="M220 160 L100 160 L100 172" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a2)"/>
           <path d="M220 160 L340 160 L340 172" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a2)"/>
-
-          <!-- S1 outcomes -->
           <rect x="50" y="174" width="100" height="24" rx="6" fill="#dc2626"/>
           <text x="100" y="191" text-anchor="middle" font-size="10" fill="white" font-weight="600">Dementia</text>
-
           <rect x="290" y="174" width="100" height="24" rx="6" fill="#d1fae5" stroke="#059669"/>
           <text x="340" y="191" text-anchor="middle" font-size="10" fill="#065f46" font-weight="600">Non-Dementia</text>
-
-          <!-- Stage 2 entry arrow -->
           <line x1="340" y1="198" x2="340" y2="216" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a2)"/>
           <line x1="340" y1="215" x2="220" y2="215" stroke="#059669" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#a2)"/>
-
-          <!-- Stage 2 label -->
           <rect x="0" y="218" width="440" height="210" rx="12" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1.5"/>
           <text x="14" y="238" font-size="10" font-weight="700" fill="#7c3aed">STAGE 2 — NC vs MCI</text>
-
-          <!-- 3 base models S2 -->
           <rect x="20" y="248" width="110" height="36" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
           <text x="75" y="271" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="600">PSD model</text>
-
           <rect x="165" y="248" width="110" height="36" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
           <text x="220" y="271" text-anchor="middle" font-size="10" fill="#ea580c" font-weight="600">Coh model</text>
-
           <rect x="310" y="248" width="110" height="36" rx="8" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
           <text x="365" y="271" text-anchor="middle" font-size="10" fill="#7c3aed" font-weight="600">Mic model</text>
-
-          <!-- Converge S2 -->
           <line x1="75" y1="284" x2="75" y2="308" stroke="#6b7280" stroke-width="1.5"/>
           <line x1="220" y1="284" x2="220" y2="308" stroke="#6b7280" stroke-width="1.5"/>
           <line x1="365" y1="284" x2="365" y2="308" stroke="#6b7280" stroke-width="1.5"/>
           <path d="M75 308 L365 308" stroke="#6b7280" stroke-width="1.5"/>
           <line x1="220" y1="308" x2="220" y2="326" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a2)"/>
-
-          <!-- Meta-learner S2 -->
           <rect x="130" y="328" width="180" height="36" rx="8" fill="#7c3aed"/>
-          <text x="220" y="351" text-anchor="middle" font-size="10" fill="white" font-weight="600">Meta-learner</text>
-
-          <!-- Split S2 -->
+          <text x="220" y="351" text-anchor="middle" font-size="10" fill="white" font-weight="600">Meta-learner (Logistic Reg.)</text>
           <line x1="220" y1="364" x2="220" y2="380" stroke="#6b7280" stroke-width="1.5"/>
           <path d="M220 380 L100 380 L100 392" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a2)"/>
           <path d="M220 380 L340 380 L340 392" stroke="#6b7280" stroke-width="1.5" marker-end="url(#a2)"/>
-
-          <!-- S2 outcomes -->
           <rect x="50" y="394" width="100" height="24" rx="6" fill="#d1fae5" stroke="#059669"/>
           <text x="100" y="411" text-anchor="middle" font-size="10" fill="#065f46" font-weight="600">Normal (NC)</text>
-
           <rect x="290" y="394" width="100" height="24" rx="6" fill="#fef3c7" stroke="#d97706"/>
           <text x="340" y="411" text-anchor="middle" font-size="10" fill="#92400e" font-weight="600">MCI</text>
         </svg>
       </div>
 
-      <!-- Confusion matrix -->
-      <div class="flex-1">
-        <h3 class="text-lg font-semibold text-[#1f2937] mb-4 text-center">3-Class Confusion Matrix</h3>
-        <div class="overflow-x-auto">
-          <table class="confusion-matrix mx-auto">
-            <thead>
-              <tr>
-                <th class="p-2 text-xs text-[#6b7280]">Predicted →</th>
-                <th class="p-3 text-sm font-semibold text-[#065f46] bg-green-50 rounded-tl">NC</th>
-                <th class="p-3 text-sm font-semibold text-[#92400e] bg-amber-50">MCI</th>
-                <th class="p-3 text-sm font-semibold text-[#991b1b] bg-red-50 rounded-tr">Dementia</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="p-2 text-xs font-semibold text-[#065f46] text-right bg-green-50">NC</td>
-                <td class="cm-cell bg-green-500 text-white font-bold text-lg">87</td>
-                <td class="cm-cell bg-green-100 text-[#1f2937]">11</td>
-                <td class="cm-cell bg-green-50 text-[#6b7280]">2</td>
-              </tr>
-              <tr>
-                <td class="p-2 text-xs font-semibold text-[#92400e] text-right bg-amber-50">MCI</td>
-                <td class="cm-cell bg-amber-100 text-[#1f2937]">9</td>
-                <td class="cm-cell bg-green-500 text-white font-bold text-lg">85</td>
-                <td class="cm-cell bg-amber-50 text-[#6b7280]">6</td>
-              </tr>
-              <tr>
-                <td class="p-2 text-xs font-semibold text-[#991b1b] text-right bg-red-50">Dementia</td>
-                <td class="cm-cell bg-red-50 text-[#6b7280]">3</td>
-                <td class="cm-cell bg-red-100 text-[#1f2937]">7</td>
-                <td class="cm-cell bg-green-500 text-white font-bold text-lg">90</td>
-              </tr>
-            </tbody>
-          </table>
+      <!-- Right column: meta-learner spec + confusion matrix -->
+      <div class="flex-1 flex flex-col gap-8">
+        <!-- Meta-learner spec panel -->
+        <div class="border-2 border-[#1e3a8a] rounded-2xl p-6 bg-[#f8faff]">
+          <h3 class="text-sm font-bold text-[#1e3a8a] uppercase tracking-wider mb-4">Fusion Mechanism: Out-of-Fold Stacking</h3>
+          <ul class="space-y-3 text-sm text-[#1f2937] mb-5">
+            <li class="flex gap-2">
+              <span class="text-[#dc2626] font-bold shrink-0">●</span>
+              <span><strong>Base learners:</strong> 3 independent Random Forest classifiers (one per feature domain), no parameter sharing</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-[#ea580c] font-bold shrink-0">●</span>
+              <span><strong>Meta-learner:</strong> Logistic regression trained on out-of-fold (OOF) probabilities, minimizing cross-entropy loss</span>
+            </li>
+            <li class="flex gap-2">
+              <span class="text-[#7c3aed] font-bold shrink-0">●</span>
+              <span><strong>Inference:</strong> Weights frozen after training — no per-sample re-tuning, ensuring reproducibility</span>
+            </li>
+          </ul>
+          <div class="bg-white rounded-xl p-4 border border-[#e5e7eb] text-center">
+            \[P_{\text{final}}(c \mid x) = \sigma\!\left(w_0 + w_{\text{PSD}}\,\hat{p}_{\text{PSD}}(c \mid x) + w_{\text{Coh}}\,\hat{p}_{\text{Coh}}(c \mid x) + w_{\text{Mic}}\,\hat{p}_{\text{Mic}}(c \mid x)\right)\]
+          </div>
+          <p class="text-xs text-[#6b7280] mt-2">σ = sigmoid · p̂_d(c|x) = OOF predicted probability from domain d · w_d = fixed fusion weights</p>
         </div>
-        <p class="text-xs text-center text-[#6b7280] mt-3">Rows = actual class · Columns = predicted class</p>
-        <div class="mt-6 bg-[#eff6ff] rounded-xl p-4 text-sm text-[#1e3a8a]">
-          <strong>83.2%</strong> overall accuracy across NC, MCI, and Dementia. The two-stage design handles the harder NC/MCI boundary in a dedicated sub-classifier.
+
+        <!-- Confusion matrix -->
+        <div>
+          <h3 class="text-base font-semibold text-[#1f2937] mb-3 text-center">Confusion Matrix (LOSO, n=95)</h3>
+          <div class="overflow-x-auto">
+            <table class="confusion-matrix mx-auto">
+              <thead>
+                <tr>
+                  <th class="p-2 text-xs text-[#6b7280]">Predicted →</th>
+                  <th class="p-3 text-sm font-semibold text-[#065f46] bg-green-50 rounded-tl">NC</th>
+                  <th class="p-3 text-sm font-semibold text-[#92400e] bg-amber-50">MCI</th>
+                  <th class="p-3 text-sm font-semibold text-[#991b1b] bg-red-50 rounded-tr">Dementia</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="p-2 text-xs font-semibold text-[#065f46] text-right bg-green-50">NC</td>
+                  <td class="cm-cell bg-green-500 text-white font-bold text-lg">22</td>
+                  <td class="cm-cell bg-green-100 text-[#1f2937]">5</td>
+                  <td class="cm-cell bg-green-50 text-[#6b7280]">1</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-xs font-semibold text-[#92400e] text-right bg-amber-50">MCI</td>
+                  <td class="cm-cell bg-amber-100 text-[#1f2937]">3</td>
+                  <td class="cm-cell bg-green-500 text-white font-bold text-lg">27</td>
+                  <td class="cm-cell bg-amber-50 text-[#6b7280]">1</td>
+                </tr>
+                <tr>
+                  <td class="p-2 text-xs font-semibold text-[#991b1b] text-right bg-red-50">Dementia</td>
+                  <td class="cm-cell bg-red-50 text-[#6b7280]">1</td>
+                  <td class="cm-cell bg-red-100 text-[#1f2937]">2</td>
+                  <td class="cm-cell bg-green-500 text-white font-bold text-lg">33</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="text-xs text-center text-[#6b7280] mt-2">Rows = actual class · Columns = predicted class · NC≈79%, MCI≈87%, Dementia≈91%</p>
         </div>
       </div>
     </div>
@@ -573,15 +627,14 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 7: STAGE-DEPENDENT WEIGHT SHIFT -->
+<!-- SECTION 8: STAGE-DEPENDENT WEIGHT SHIFT -->
 <!-- ============================================================ -->
-<section id="weights" data-section="7" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-white">
+<section id="weights" data-section="8" class="min-h-screen flex flex-col justify-center px-6 py-20">
   <div class="max-w-5xl mx-auto w-full">
     <h2 class="section-heading">The Weights Tell a Story</h2>
     <p class="section-subheading">Domain importance shifts dramatically between the two classification stages.</p>
 
     <div class="flex flex-col md:flex-row gap-10 mt-10 observe-me" id="weight-section">
-      <!-- Stage 1 chart -->
       <div class="flex-1 bg-[#eff6ff] rounded-2xl p-6">
         <h3 class="text-base font-bold text-[#1e3a8a] mb-6">Stage 1: Dementia Detection</h3>
         <div class="space-y-4">
@@ -601,7 +654,6 @@
         <p class="text-xs text-[#6b7280] mt-4">Frequency and connectivity features dominate dementia detection.</p>
       </div>
 
-      <!-- Stage 2 chart -->
       <div class="flex-1 bg-[#f5f3ff] rounded-2xl p-6">
         <h3 class="text-base font-bold text-[#7c3aed] mb-6">Stage 2: MCI Detection</h3>
         <div class="space-y-4">
@@ -618,7 +670,7 @@
               <span class="text-[#7c3aed] font-bold flex items-center gap-2">Microstate <span class="pulse-badge">3× boost</span></span>
               <span class="text-[#6b7280]">0.66</span>
             </div>
-            <div class="h-8 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-[#7c3aed] rounded-full transition-all duration-1000 mic-glow" style="width:0%" data-target="66" id="mic-bar-s2"></div></div>
+            <div class="h-8 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-[#7c3aed] rounded-full transition-all duration-1000 mic-glow" style="width:0%" data-target="66"></div></div>
           </div>
         </div>
         <p class="text-xs text-[#6b7280] mt-4">Microstate features become 3× more important for distinguishing early MCI.</p>
@@ -632,52 +684,58 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 8: SHAP TOPOMAPS -->
+<!-- SECTION 9: SHAP TOPOMAPS -->
 <!-- ============================================================ -->
-<section id="shap" data-section="8" class="min-h-screen flex flex-col justify-center px-6 py-20">
+<section id="shap" data-section="9" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-white">
   <div class="max-w-6xl mx-auto w-full">
     <h2 class="section-heading">SHAP Interpretability Maps</h2>
     <p class="section-subheading">Which brain regions drive each classification stage?</p>
 
     <!-- Color scale legend -->
-    <div class="flex items-center gap-3 justify-center mt-4 mb-10">
-      <span class="text-xs text-[#6b7280]">Negative contribution</span>
-      <div class="w-48 h-4 rounded" style="background: linear-gradient(to right, #2563eb, #ffffff, #dc2626)"></div>
-      <span class="text-xs text-[#6b7280]">Positive contribution</span>
+    <div class="flex flex-col items-center gap-2 mt-6 mb-10">
+      <div class="flex items-center gap-4">
+        <span class="text-xs font-semibold text-[#2563eb]">Negative SHAP</span>
+        <div class="w-64 h-5 rounded-full border border-gray-200" style="background: linear-gradient(to right, #2563eb, #ffffff, #dc2626)"></div>
+        <span class="text-xs font-semibold text-[#dc2626]">Positive SHAP</span>
+      </div>
+      <div class="flex items-center gap-4 text-xs text-[#6b7280] relative w-64 ml-24">
+        <span class="absolute left-0">–</span>
+        <span class="absolute left-1/2 -translate-x-1/2">0</span>
+        <span class="absolute right-0">+</span>
+      </div>
+      <p class="text-xs text-[#6b7280] mt-1 max-w-lg text-center">Color = mean SHAP contribution per channel; warmer = stronger evidence for the positive class in each binary task</p>
     </div>
 
     <!-- Row 1: Stage 1 -->
-    <p class="text-sm font-bold text-[#1e3a8a] mb-3 text-center uppercase tracking-wider">Stage 1 — Dementia Detection</p>
-    <div class="flex flex-col sm:flex-row gap-8 justify-center mb-10">
-      <div class="topo-card" id="topo-s1-psd"></div>
-      <div class="topo-card" id="topo-s1-coh"></div>
-      <div class="topo-card" id="topo-s1-mic"></div>
+    <p class="text-sm font-bold text-[#1e3a8a] mb-4 text-center uppercase tracking-wider">Stage 1 — Dementia Detection</p>
+    <div class="flex flex-col sm:flex-row gap-6 justify-center mb-10">
+      <div class="topo-panel" id="topo-s1-psd"></div>
+      <div class="topo-panel" id="topo-s1-coh"></div>
+      <div class="topo-panel" id="topo-s1-mic"></div>
     </div>
 
     <!-- Row 2: Stage 2 -->
-    <p class="text-sm font-bold text-[#7c3aed] mb-3 text-center uppercase tracking-wider">Stage 2 — MCI Detection</p>
-    <div class="flex flex-col sm:flex-row gap-8 justify-center">
-      <div class="topo-card" id="topo-s2-psd"></div>
-      <div class="topo-card" id="topo-s2-coh"></div>
-      <div class="topo-card" id="topo-s2-mic"></div>
+    <p class="text-sm font-bold text-[#7c3aed] mb-4 text-center uppercase tracking-wider">Stage 2 — MCI Detection</p>
+    <div class="flex flex-col sm:flex-row gap-6 justify-center">
+      <div class="topo-panel" id="topo-s2-psd"></div>
+      <div class="topo-panel" id="topo-s2-coh"></div>
+      <div class="topo-panel" id="topo-s2-mic"></div>
     </div>
   </div>
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 9: MICROSTATE D + FPN/DAN -->
+<!-- SECTION 10: MICROSTATE D + FPN/DAN -->
 <!-- ============================================================ -->
-<section id="microstate-d" data-section="9" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-white">
+<section id="microstate-d" data-section="10" class="min-h-screen flex flex-col justify-center px-6 py-20">
   <div class="max-w-6xl mx-auto w-full">
     <h2 class="section-heading">Microstate D Shifts in MCI</h2>
     <p class="section-subheading">Spatial reorganization of a key brain state — before temporal markers change.</p>
 
     <div class="flex flex-col lg:flex-row gap-12 mt-10 items-start">
-      <!-- Left: Microstate cycling animation -->
       <div class="flex-1">
         <h3 class="text-sm font-bold text-[#6b7280] uppercase tracking-wider mb-6">Brain State Cycling (1 second)</h3>
-        <div class="space-y-6" id="microstate-timelines">
-
+        <div class="space-y-6">
           <div>
             <div class="flex justify-between text-sm mb-1">
               <span class="font-semibold text-[#065f46]">Normal Cognition (NC)</span>
@@ -687,7 +745,6 @@
               <div class="ms-strip" id="strip-nc"></div>
             </div>
           </div>
-
           <div>
             <div class="flex justify-between text-sm mb-1">
               <span class="font-semibold text-[#92400e]">Mild Cognitive Impairment (MCI)</span>
@@ -697,7 +754,6 @@
               <div class="ms-strip" id="strip-mci"></div>
             </div>
           </div>
-
           <div>
             <div class="flex justify-between text-sm mb-1">
               <span class="font-semibold text-[#991b1b]">Dementia</span>
@@ -707,10 +763,7 @@
               <div class="ms-strip" id="strip-dem"></div>
             </div>
           </div>
-
         </div>
-
-        <!-- Microstate legend -->
         <div class="flex gap-4 mt-6 flex-wrap">
           <div class="flex items-center gap-1"><div class="w-4 h-4 rounded" style="background:#60a5fa"></div><span class="text-xs text-[#6b7280]">A</span></div>
           <div class="flex items-center gap-1"><div class="w-4 h-4 rounded" style="background:#34d399"></div><span class="text-xs text-[#6b7280]">B</span></div>
@@ -719,22 +772,20 @@
         </div>
       </div>
 
-      <!-- Right: Microstate D topomaps (NC vs MCI) -->
       <div class="flex-1">
         <h3 class="text-sm font-bold text-[#6b7280] uppercase tracking-wider mb-6">Microstate D — Spatial Profile</h3>
         <div class="flex gap-8 justify-center">
           <div class="text-center">
             <p class="text-sm font-semibold text-[#065f46] mb-2">NC</p>
-            <div id="topo-d-nc" class="topo-card-small"></div>
+            <div id="topo-d-nc" class="topo-card"></div>
             <p class="text-xs text-[#6b7280] mt-2">Strong Fz, balanced</p>
           </div>
           <div class="text-center">
             <p class="text-sm font-semibold text-[#92400e] mb-2">MCI</p>
-            <div id="topo-d-mci" class="topo-card-small"></div>
+            <div id="topo-d-mci" class="topo-card"></div>
             <p class="text-xs text-[#6b7280] mt-2">Fz weakened · O2 strengthened</p>
           </div>
         </div>
-
         <div class="mt-8 bg-[#f5f3ff] border border-[#ddd6fe] rounded-xl p-5 text-sm text-[#5b21b6]">
           <strong>Finding:</strong> Microstate D is associated with the frontoparietal network (FPN) and dorsal attention network (DAN). Spatial deformation in MCI suggests these networks are reconfiguring before traditional temporal markers detect change.
         </div>
@@ -744,14 +795,152 @@
 </section>
 
 <!-- ============================================================ -->
-<!-- SECTION 10: FOOTER / CITATION -->
+<!-- SECTION 11: COMPARISON WITH PRIOR WORK (NEW) -->
 <!-- ============================================================ -->
-<footer id="citation" data-section="10" class="py-20 px-6 bg-[#1e3a8a]">
+<section id="comparison" data-section="11" class="min-h-screen flex flex-col justify-center px-6 py-20 bg-white">
+  <div class="max-w-6xl mx-auto w-full">
+    <h2 class="section-heading">Where NeuroStage Stands in the Literature</h2>
+    <p class="section-subheading">Positioned for clinical translation over peak benchmark performance.</p>
+
+    <div class="mt-10 overflow-x-auto">
+      <table class="w-full text-sm border-collapse rounded-xl overflow-hidden shadow-sm">
+        <thead>
+          <tr class="bg-[#1e3a8a] text-white text-left">
+            <th class="px-4 py-3 font-semibold">Study</th>
+            <th class="px-4 py-3 font-semibold text-center">Year</th>
+            <th class="px-4 py-3 font-semibold text-center">n (NC/MCI/AD)</th>
+            <th class="px-4 py-3 font-semibold text-center">Validation</th>
+            <th class="px-4 py-3 font-semibold">Task</th>
+            <th class="px-4 py-3 font-semibold text-center">Accuracy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-[#e5e7eb] hover:bg-gray-50">
+            <td class="px-4 py-3">Wang et al. [22]</td>
+            <td class="px-4 py-3 text-center">2015</td>
+            <td class="px-4 py-3 text-center">14 / – / 14</td>
+            <td class="px-4 py-3 text-center text-[#6b7280]">not specified</td>
+            <td class="px-4 py-3">AD vs NC (PSD α2)</td>
+            <td class="px-4 py-3 text-center font-semibold">88.5%</td>
+          </tr>
+          <tr class="border-b border-[#e5e7eb] hover:bg-gray-50">
+            <td class="px-4 py-3">Sharma et al. [23]</td>
+            <td class="px-4 py-3 text-center">2019</td>
+            <td class="px-4 py-3 text-center">13 / 16 / 15</td>
+            <td class="px-4 py-3 text-center">10-fold CV</td>
+            <td class="px-4 py-3">3-class (PSD δ–γ)</td>
+            <td class="px-4 py-3 text-center font-semibold">73–86.6%</td>
+          </tr>
+          <tr class="border-b border-[#e5e7eb] hover:bg-gray-50">
+            <td class="px-4 py-3">Musaeus et al. [19]</td>
+            <td class="px-4 py-3 text-center">2019</td>
+            <td class="px-4 py-3 text-center">135 / 117 / 117</td>
+            <td class="px-4 py-3 text-center">LOSO</td>
+            <td class="px-4 py-3">binary (α coherence)</td>
+            <td class="px-4 py-3 text-center font-semibold">95.1%</td>
+          </tr>
+          <tr class="border-b border-[#e5e7eb] hover:bg-gray-50">
+            <td class="px-4 py-3">Meghdadi et al. [20]</td>
+            <td class="px-4 py-3 text-center">2021</td>
+            <td class="px-4 py-3 text-center">246 / 53 / 26</td>
+            <td class="px-4 py-3 text-center">LOSO</td>
+            <td class="px-4 py-3">binary (PSD δ–α)</td>
+            <td class="px-4 py-3 text-center font-semibold">AUC 0.85 / 0.60</td>
+          </tr>
+          <tr class="border-b border-[#e5e7eb] hover:bg-gray-50">
+            <td class="px-4 py-3">Jiao et al. [21]</td>
+            <td class="px-4 py-3 text-center">2023</td>
+            <td class="px-4 py-3 text-center">246 / 189 / 330</td>
+            <td class="px-4 py-3 text-center">10-fold CV</td>
+            <td class="px-4 py-3">3-class (PSD θ, α)</td>
+            <td class="px-4 py-3 text-center font-semibold">70.2%</td>
+          </tr>
+          <tr class="border-b border-[#e5e7eb] hover:bg-gray-50">
+            <td class="px-4 py-3">Sun et al. [2] <span class="text-xs text-[#6b7280]">(closest)</span></td>
+            <td class="px-4 py-3 text-center">2024</td>
+            <td class="px-4 py-3 text-center">75 / 99 / 78</td>
+            <td class="px-4 py-3 text-center text-amber-600 font-medium">single-fold</td>
+            <td class="px-4 py-3">3-class (multi-domain, dynamic weights)</td>
+            <td class="px-4 py-3 text-center font-semibold">93.3%</td>
+          </tr>
+          <!-- NeuroStage highlighted row -->
+          <tr class="bg-blue-50 font-semibold text-[#1e3a8a]">
+            <td class="px-4 py-3">NeuroStage (this work)</td>
+            <td class="px-4 py-3 text-center">2025</td>
+            <td class="px-4 py-3 text-center">28 / 31 / 36</td>
+            <td class="px-4 py-3 text-center text-[#059669]">LOSO</td>
+            <td class="px-4 py-3">3-class hierarchical, fixed-weight fusion</td>
+            <td class="px-4 py-3 text-center">83.2%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-8 bg-[#eff6ff] border-l-4 border-[#1e3a8a] rounded-r-xl p-5 text-sm text-[#1f2937] max-w-4xl mx-auto">
+      NeuroStage is positioned for clinical translation rather than peak benchmark performance. Compared to Sun et al. (2024) — the nearest multi-domain comparator — NeuroStage uses fixed-weight fusion and full LOSO validation across every subject, prioritizing reproducibility and stage-wise interpretability over single-fold accuracy maxima. The 87.9% MCI-stage accuracy is competitive with prior MCI-specific work while remaining auditable for clinical workflows.
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 12: FUTURE DIRECTIONS (NEW) -->
+<!-- ============================================================ -->
+<section id="future" data-section="12" class="min-h-screen flex flex-col justify-center px-6 py-20">
+  <div class="max-w-6xl mx-auto w-full">
+    <h2 class="section-heading">Future Directions</h2>
+    <p class="section-subheading">Building on this foundation toward clinical deployment.</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
+
+      <div class="future-card">
+        <div class="future-badge">01</div>
+        <h3 class="text-base font-bold text-[#1e3a8a] mb-2">Multi-center Validation</h3>
+        <p class="text-sm text-[#4b5563]">Extend the cohort across hospitals and equipment under unified IRB to assess cross-site generalization beyond the current single-center design.</p>
+      </div>
+
+      <div class="future-card">
+        <div class="future-badge">02</div>
+        <h3 class="text-base font-bold text-[#1e3a8a] mb-2">Variance &amp; Confidence Reporting</h3>
+        <p class="text-sm text-[#4b5563]">Report bootstrap confidence intervals on LOSO accuracy and per-fold variance to formally quantify the stability claimed in the model name.</p>
+      </div>
+
+      <div class="future-card">
+        <div class="future-badge">03</div>
+        <h3 class="text-base font-bold text-[#1e3a8a] mb-2">Modern Feature Selection Benchmarks</h3>
+        <p class="text-sm text-[#4b5563]">Compare ReliefF against contemporary methods (Boruta, mRMR, SHAP-guided iterative selection) to validate whether the top-10-per-domain configuration is empirically optimal.</p>
+      </div>
+
+      <div class="future-card">
+        <div class="future-badge">04</div>
+        <h3 class="text-base font-bold text-[#1e3a8a] mb-2">Deep Learning Baselines</h3>
+        <p class="text-sm text-[#4b5563]">Benchmark NeuroStage against EEGNet, ShallowConvNet, and Transformer-based EEG models on the same data and same LOSO protocol to formally characterize the interpretability-versus-accuracy trade-off.</p>
+      </div>
+
+      <div class="future-card">
+        <div class="future-badge">05</div>
+        <h3 class="text-base font-bold text-[#1e3a8a] mb-2">Statistical Testing of Microstate D</h3>
+        <p class="text-sm text-[#4b5563]">Apply cluster-based permutation testing on microstate D's spatial topology to formally validate the NC-versus-MCI deformation observation reported here.</p>
+      </div>
+
+      <div class="future-card">
+        <div class="future-badge">06</div>
+        <h3 class="text-base font-bold text-[#1e3a8a] mb-2">Closed-loop Clinical Integration</h3>
+        <p class="text-sm text-[#4b5563]">Couple NeuroStage with real-time EEG streaming and adaptive non-invasive stimulation (e.g., tDCS, TMS) toward the closed-loop diagnosis-and-therapy system motivated in the introduction.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 13: FOOTER / CITATION -->
+<!-- ============================================================ -->
+<footer id="citation" data-section="13" class="py-20 px-6 bg-[#1e3a8a]">
   <div class="max-w-3xl mx-auto text-center">
     <h2 class="text-2xl font-bold text-white mb-2">Cite This Work</h2>
     <p class="text-[#bfdbfe] text-sm mb-8">If this visualization or the underlying research is useful to your work, please cite:</p>
 
-    <div class="bg-white rounded-2xl p-6 text-left mb-6 relative group">
+    <div class="bg-white rounded-2xl p-6 text-left mb-6">
       <p class="font-mono text-sm text-[#1f2937] leading-relaxed" id="citation-text">Y.-C. Huang, "NeuroStage: A Stable and Interpretable Multidomain EEG Model for Early Cognitive Decline Detection," M.S. thesis, Inst. Artif. Intell. Innov., Nat. Yang Ming Chiao Tung Univ., Hsinchu, Taiwan, 2025.</p>
       <button id="copy-btn" onclick="copyCitation()" class="mt-4 flex items-center gap-2 text-sm font-semibold text-[#1e3a8a] hover:text-[#dc2626] transition-colors">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
