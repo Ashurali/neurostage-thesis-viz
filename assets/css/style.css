@@ -17,6 +17,7 @@ body {
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* ---- Section headings ---- */
@@ -79,6 +80,9 @@ body {
 }
 .topo-card { display: flex; flex-direction: column; align-items: center; }
 
+/* Make topomap SVGs shrink on narrow screens */
+.topo-panel svg, .topo-card svg { max-width: 100%; height: auto; }
+
 /* ---- Microstate cycling ---- */
 .ms-track { height: 36px; border-radius: 8px; overflow: hidden; background: #f3f4f6; position: relative; }
 .ms-strip {
@@ -124,9 +128,15 @@ body {
 @media (max-width: 768px) {
   .section-heading { font-size: 1.5rem; }
   .stat-number { font-size: 2.25rem; }
+  .stat-card { min-width: 0; }
   .feature-card { min-width: 0; }
   #full-grid { grid-template-columns: repeat(20, 10px); }
   .topo-panel { min-height: 280px; }
+  .cm-cell { padding: 0.5rem 0.6rem; min-width: 2.5rem; font-size: 0.9rem; }
+}
+
+@media (max-width: 400px) {
+  #full-grid { grid-template-columns: repeat(14, 10px); }
 }
 
 /* ---- Reduced motion ---- */
