@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NeuroStage — EEG-Based Cognitive Decline Detection</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body, {delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}]});"></script>
+
   <link rel="stylesheet" href="assets/css/style.css" />
   <script>
     tailwind.config = {
@@ -507,8 +504,8 @@
 
     <div class="flex flex-col lg:flex-row gap-12 mt-10 items-start">
       <!-- Classifier diagram -->
-      <div class="flex-1">
-        <svg viewBox="0 0 440 460" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-md mx-auto">
+      <div class="w-full lg:w-[420px] lg:shrink-0 flex justify-center">
+        <svg viewBox="0 0 440 460" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-[420px]">
           <defs>
             <marker id="a2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
               <path d="M0,0 L0,6 L8,3 z" fill="#6b7280"/>
@@ -564,7 +561,7 @@
       </div>
 
       <!-- Right column: meta-learner spec + confusion matrix -->
-      <div class="flex-1 flex flex-col gap-8">
+      <div class="flex-1 min-w-0 flex flex-col gap-8">
         <!-- Meta-learner spec panel -->
         <div class="border-2 border-[#1e3a8a] rounded-2xl p-6 bg-[#f8faff]">
           <h3 class="text-sm font-bold text-[#1e3a8a] uppercase tracking-wider mb-4">Fusion Mechanism: Out-of-Fold Stacking</h3>
@@ -582,16 +579,37 @@
               <span><strong>Inference:</strong> Weights frozen after training — no per-sample re-tuning, ensuring reproducibility</span>
             </li>
           </ul>
-          <div class="bg-white rounded-xl p-4 border border-[#e5e7eb] text-center">
-            \[P_{\text{final}}(c \mid x) = \sigma\!\left(w_0 + w_{\text{PSD}}\,\hat{p}_{\text{PSD}}(c \mid x) + w_{\text{Coh}}\,\hat{p}_{\text{Coh}}(c \mid x) + w_{\text{Mic}}\,\hat{p}_{\text{Mic}}(c \mid x)\right)\]
+          <div class="math-block">
+            <table class="math-table">
+              <tr>
+                <td class="math-cell-lhs"><i>P</i><sub>final</sub>(<i>c</i>&thinsp;&mid;&thinsp;<i>x</i>)</td>
+                <td class="math-cell-rel">=</td>
+                <td class="math-cell-rhs"><i>&sigma;</i><span class="math-bigparen math-bigparen-l">(</span><i>w</i><sub>0</sub></td>
+              </tr>
+              <tr>
+                <td class="math-cell-lhs"></td>
+                <td class="math-cell-rel"></td>
+                <td class="math-cell-rhs"><span class="math-continuation">+&ensp;<i>w</i><sub>PSD</sub>&thinsp;&sdot;&thinsp;<i>p&#770;</i><sub>PSD</sub>(<i>c</i>&thinsp;&mid;&thinsp;<i>x</i>)</span></td>
+              </tr>
+              <tr>
+                <td class="math-cell-lhs"></td>
+                <td class="math-cell-rel"></td>
+                <td class="math-cell-rhs"><span class="math-continuation">+&ensp;<i>w</i><sub>Coh</sub>&thinsp;&sdot;&thinsp;<i>p&#770;</i><sub>Coh</sub>(<i>c</i>&thinsp;&mid;&thinsp;<i>x</i>)</span></td>
+              </tr>
+              <tr>
+                <td class="math-cell-lhs"></td>
+                <td class="math-cell-rel"></td>
+                <td class="math-cell-rhs"><span class="math-continuation">+&ensp;<i>w</i><sub>Mic</sub>&thinsp;&sdot;&thinsp;<i>p&#770;</i><sub>Mic</sub>(<i>c</i>&thinsp;&mid;&thinsp;<i>x</i>)<span class="math-bigparen math-bigparen-r">)</span></span></td>
+              </tr>
+            </table>
           </div>
           <p class="text-xs text-[#6b7280] mt-2">σ = sigmoid · p̂_d(c|x) = OOF predicted probability from domain d · w_d = fixed fusion weights</p>
         </div>
 
         <!-- Confusion matrix -->
-        <div>
+        <div class="flex flex-col items-center">
           <h3 class="text-base font-semibold text-[#1f2937] mb-3 text-center">Confusion Matrix (LOSO, n=95)</h3>
-          <div class="overflow-x-auto">
+          <div class="overflow-x-auto w-full flex justify-center">
             <table class="confusion-matrix mx-auto">
               <thead>
                 <tr>
