@@ -1,0 +1,14 @@
+{
+  "slug": "neurostage-thesis-viz",
+  "title": "NeuroStage",
+  "subtitle": "A stable, interpretable multidomain EEG model for early cognitive decline detection",
+  "authors": ["Yun-Chieh Huang (黃云潔)"],
+  "advisor": "Li-Chun Wang (王蒞君)",
+  "year": 2025,
+  "institution": "NYCU · Brain Science and Technology Center",
+  "tags": ["EEG", "BCI", "ensemble", "interpretability"],
+  "abstract": "Two-stage ensemble combining PSD, coherence, and microstate features; 83.2% three-class accuracy under LOSO over 95 subjects.",
+  "url": "https://ashurali.github.io/neurostage-thesis-viz/",
+  "repo": "https://github.com/ashurali/neurostage-thesis-viz",
+  "archive": false
+}
